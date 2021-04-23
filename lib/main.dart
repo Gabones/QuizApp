@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 // void main () {
 //   runApp(MyApp());
@@ -52,7 +53,18 @@ class _MyAppState extends State<MyApp> {
                 //...
                 print('Answer 3 chosen!');
               },
-            )
+            ),
+            RaisedButton(
+                color: Colors.pink,
+                child: Text(
+                  'Raised Example',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  print('This does not do anything');
+                }
+            ),
+            Answer(_answerQuestion),
           ],
         ),
       ),
