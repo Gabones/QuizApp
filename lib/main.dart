@@ -16,29 +16,40 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
 
+  final List<Map> questions = [
+    {
+      'questionText':' Qual sua cor favorita?',
+      'answer': ['Preto', 'Vermelho', 'Verde', 'Branco']
+    },
+    {
+      'questionText':'Qual seu animal preferido?',
+      'answer': ['Coelho', 'Cobra', 'Elefante', 'Leão']
+    },
+    {
+      'questionText': 'Qual seu professor preferido?',
+      'answer': ['Eu','I', 'Me', 'Myself']
+    },
+  ];
+
   void _answerQuestion() {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
     print('Answer chosen!');
+    if (_questionIndex < questions.length) {
+      print('We tienemos more perguntas!');
+    } else {
+      print('No more questions!');
+    }
   }
+
+  // var dummy = const ['Hello'];
+  // dummy.add('Gabriel'); //não posso adicionar elementos a uma lista const
+  // print(dummy); //mesmo a variavel dummy sendo do tipo var
 
   @override
   Widget build(BuildContext context) {
-    List<Map> questions = [
-      {
-        'questionText':' Qual sua cor favorita?',
-        'answer': ['Preto', 'Vermelho', 'Verde', 'Branco']
-      },
-      {
-        'questionText':'Qual seu animal preferido?',
-        'answer': ['Coelho', 'Cobra', 'Elefante', 'Leão']
-      },
-      {
-        'questionText': 'Qual seu professor preferido?',
-        'answer': ['Eu','I', 'Me', 'Myself']
-      },
-    ];
+
 
 
     return MaterialApp(
@@ -46,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Quiz App?'),
         ),
-        body: Column(
+        body: (_questionIndex < questions.length) ? Column(
           children: [
             Question(questions[_questionIndex]['questionText']),
             ...(questions[_questionIndex]['answer'] as List<String>).map((question) {
@@ -79,6 +90,8 @@ class _MyAppState extends State<MyApp> {
             // ),
             // Answer(_answerQuestion),
           ],
+        ) : Center(
+          child: Text('Fim')
         ),
       ),
     );
