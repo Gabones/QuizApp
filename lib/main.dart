@@ -25,9 +25,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> questions = [
-      'Qual sua cor favorita?',
-      'Qual seu animal preferido?'
+    List<Map> questions = [
+      {
+        'questionText':' Qual sua cor favorita?',
+        'answer': ['Preto', 'Vermelho', 'Verde', 'Branco']
+      },
+      {
+        'questionText':'Qual seu animal preferido?',
+        'answer': ['Coelho', 'Cobra', 'Elefante', 'Leão']
+      },
+      {
+        'questionText': 'Qual seu professor preferido?',
+        'answer': ['Eu','I', 'Me', 'Myself']
+      },
     ];
 
 
@@ -38,33 +48,36 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(questions[_questionIndex]),
-            ElevatedButton(
-              child: Text('Resposta 1'),
-              onPressed: _answerQuestion,
-            ),
-            ElevatedButton(
-              child: Text('Resposta 2'),
-              onPressed: () => print('Answer 2 chosen!'),
-            ),
-            ElevatedButton(
-              child: Text('Resposta 3'),
-              onPressed: () {
-                //...
-                print('Answer 3 chosen!');
-              },
-            ),
-            RaisedButton(
-                color: Colors.pink,
-                child: Text(
-                  'Raised Example',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  print('This does not do anything');
-                }
-            ),
-            Answer(_answerQuestion),
+            Question(questions[_questionIndex]['questionText']),
+            ...(questions[_questionIndex]['answer'] as List<String>).map((question) {
+              return Answer(_answerQuestion ,question);
+            }).toList(),
+            // ElevatedButton(
+            //   child: Text('Resposta 1'),
+            //   onPressed: _answerQuestion,
+            // ),
+            // ElevatedButton(
+            //   child: Text('Resposta 2'),
+            //   onPressed: () => print('Answer 2 chosen!'),
+            // ),
+            // ElevatedButton(
+            //   child: Text('Resposta 3'),
+            //   onPressed: () {
+            //     //...
+            //     print('Answer 3 chosen!');
+            //   },
+            // ),
+            // RaisedButton(
+            //     color: Colors.pink,
+            //     child: Text(
+            //       'Raised Example',
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //     onPressed: () {
+            //       print('This does not do anything');
+            //     }
+            // ),
+            // Answer(_answerQuestion),
           ],
         ),
       ),
